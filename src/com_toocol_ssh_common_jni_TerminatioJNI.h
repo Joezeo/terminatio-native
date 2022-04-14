@@ -10,9 +10,9 @@ extern "C" {
 /*
  * Class:     com_toocol_ssh_common_jni_TerminatioJNI
  * Method:    getCh
- * Signature: ()Ljava/lang/String;
+ * Signature: ()I
  */
-JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCh
+JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCh
   (JNIEnv *, jobject);
 
 /*
