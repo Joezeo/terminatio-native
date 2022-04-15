@@ -1,7 +1,7 @@
 //
 // Created by user on 2022/4/14.
 //
-#include "com_toocol_ssh_common_jni_TerminatioJNI.h"
+#include <com_toocol_ssh_common_jni_TerminatioJNI.h>
 #include <windows.h>
 #include <conio.h>
 #include <shlobj.h>
@@ -61,10 +61,7 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_chooseFil
             p += lstrlen(p) + 1; // move to next file
         }
 
-        char *final_file_name = malloc((strlen(sz_file_name) - 1) * sizeof(char));
-        memcpy_s(final_file_name, strlen(sz_file_name) - 1, sz_file_name, strlen(sz_file_name) - 1);
-        jstring jstring_file_names = (*env)->NewStringUTF(env, final_file_name);
-        free(final_file_name);
+        jstring jstring_file_names = (*env)->NewStringUTF(env, sz_file_name);
         ZeroMemory(&open, sizeof(OPENFILENAME));
         return jstring_file_names;
     } else {
