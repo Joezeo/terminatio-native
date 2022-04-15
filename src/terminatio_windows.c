@@ -4,6 +4,7 @@
 #include "com_toocol_ssh_common_jni_TerminatioJNI.h"
 #include <windows.h>
 #include <conio.h>
+#include <shlobj.h>
 
 /*
  * Class:     com_toocol_ssh_common_jni_TerminatioJNI
@@ -11,7 +12,7 @@
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCh
-  (JNIEnv *, jobject) {
+        (JNIEnv *, jobject) {
     return getch();
 }
 
@@ -21,15 +22,16 @@ JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCh
  * Signature: ()Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_chooseFiles
-  (JNIEnv * env, jobject) {
-    char open_file_names[MAX_PATH * 80];
-    char sz_file_name[MAX_PATH * 80];
-    char sz_path[MAX_PATH];
-    char* p;
+        (JNIEnv *env, jobject) {
+    TCHAR open_file_names[MAX_PATH * 80];
+    TCHAR sz_file_name[MAX_PATH * 80];
+    TCHAR sz_path[MAX_PATH];
+    TCHAR *p;
     int len;
 
     OPENFILENAME open;
     ZeroMemory(&open, sizeof(OPENFILENAME));
+    open.hwndOwner = GetForegroundWindow();
     open.lStructSize = sizeof(OPENFILENAME);
     open.lpstrFile = open_file_names;
     open.lpstrFile[0] = '\0';
@@ -38,12 +40,12 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_chooseFil
     open.lpstrFileTitle = NULL;
     open.nMaxFileTitle = 0;
     open.Flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR | OFN_ALLOWMULTISELECT;
+
     if (GetOpenFileName(&open)) {
         lstrcpyn(sz_path, open_file_names, open.nFileOffset);
-        sz_path[open.nFileOffset ] = '\0';
+        sz_path[open.nFileOffset] = '\0';
         len = lstrlen(sz_path);
-        if(sz_path[len - 1] != '\\' )
-        {
+        if (sz_path[len - 1] != '\\') {
             // if selected multiple file, have to add '\\' in the end.
             lstrcat(sz_path, TEXT("\\"));
         }
@@ -52,16 +54,49 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_chooseFil
         p = open_file_names + open.nFileOffset;
 
         ZeroMemory(sz_file_name, sizeof(sz_file_name));
-        while( *p )
-        {
+        while (*p) {
             lstrcat(sz_file_name, sz_path); // add path
             lstrcat(sz_file_name, p); // add file name
-            lstrcat(sz_file_name, TEXT("\n")); // new line
-            p += lstrlen(p) +1; // move to next file
+            lstrcat(sz_file_name, TEXT(",")); // add
+            p += lstrlen(p) + 1; // move to next file
         }
-        return (*env) -> NewString(env, (const jchar *) sz_file_name, MAX_PATH * 80);
+
+        char *final_file_name = malloc((strlen(sz_file_name) - 1) * sizeof(char));
+        memcpy_s(final_file_name, strlen(sz_file_name) - 1, sz_file_name, strlen(sz_file_name) - 1);
+        jstring jstring_file_names = (*env)->NewStringUTF(env, final_file_name);
+        free(final_file_name);
+        ZeroMemory(&open, sizeof(OPENFILENAME));
+        return jstring_file_names;
+    } else {
+        ZeroMemory(&open, sizeof(OPENFILENAME));
+        return 0;
     }
-    else {
+}
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    chooseDirectory
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_chooseDirectory
+        (JNIEnv *env, jobject) {
+    LPITEMIDLIST lp_dlist = NULL;
+    TCHAR sz_path_name[MAX_PATH];
+
+    BROWSEINFO bInfo;
+    ZeroMemory(&bInfo, sizeof(BROWSEINFO));
+
+    bInfo.hwndOwner = GetForegroundWindow();
+    bInfo.ulFlags = BIF_RETURNONLYFSDIRS | BIF_USENEWUI |
+                    BIF_UAHINT | BIF_NONEWFOLDERBUTTON;
+    lp_dlist = SHBrowseForFolder(&bInfo);
+
+    if (lp_dlist != NULL) {
+        SHGetPathFromIDList(lp_dlist, sz_path_name);
+        ZeroMemory(&bInfo, sizeof(BROWSEINFO));
+        return (*env)->NewStringUTF(env, sz_path_name);
+    } else {
+        ZeroMemory(&bInfo, sizeof(BROWSEINFO));
         return 0;
     }
 }
@@ -72,11 +107,11 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_chooseFil
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getWindowWidth
-  (JNIEnv *, jobject) {
-    HANDLE outputHandle = GetStdHandle (STD_OUTPUT_HANDLE);
-    PCONSOLE_SCREEN_BUFFER_INFO info =  malloc (sizeof (CONSOLE_SCREEN_BUFFER_INFO));
-    GetConsoleScreenBufferInfo (outputHandle, info);
-    jint width = info->srWindow.Right - info->srWindow.Left+1;
+        (JNIEnv *, jobject) {
+    HANDLE outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    PCONSOLE_SCREEN_BUFFER_INFO info = malloc(sizeof(CONSOLE_SCREEN_BUFFER_INFO));
+    GetConsoleScreenBufferInfo(outputHandle, info);
+    jint width = info->srWindow.Right - info->srWindow.Left + 1;
     free(info);
     return width;
 }
@@ -87,11 +122,11 @@ JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getWindowWid
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getWindowHeight
-  (JNIEnv *, jobject) {
-    HANDLE outputHandle = GetStdHandle (STD_OUTPUT_HANDLE);
-    PCONSOLE_SCREEN_BUFFER_INFO info =  malloc (sizeof (CONSOLE_SCREEN_BUFFER_INFO));
-    GetConsoleScreenBufferInfo (outputHandle, info);
-    jint height = info->srWindow.Bottom - info->srWindow.Top+1;
+        (JNIEnv *, jobject) {
+    HANDLE outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    PCONSOLE_SCREEN_BUFFER_INFO info = malloc(sizeof(CONSOLE_SCREEN_BUFFER_INFO));
+    GetConsoleScreenBufferInfo(outputHandle, info);
+    jint height = info->srWindow.Bottom - info->srWindow.Top + 1;
     free(info);
     return height;
 }
