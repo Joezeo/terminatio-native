@@ -47,6 +47,22 @@ JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getWindowWid
 JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getWindowHeight
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    getCursorPosition
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCursorPosition
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    cursorBackLine
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorBackLine
+  (JNIEnv *, jobject, jint);
+
 #ifdef __cplusplus
 }
 #endif

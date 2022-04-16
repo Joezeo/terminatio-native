@@ -127,3 +127,41 @@ JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getWindowHei
     free(info);
     return height;
 }
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    getCursorPosition
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCursorPosition
+        (JNIEnv *env, jobject) {
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO cbsi;
+    GetConsoleScreenBufferInfo(handle, &cbsi);
+    COORD coord = cbsi.dwCursorPosition;
+
+    TCHAR pos[1024];
+    TCHAR tmp[512];
+    ZeroMemory(pos, sizeof(TCHAR));
+    ZeroMemory(tmp, sizeof(TCHAR));
+    lstrcat(pos, ltoa(coord.X, tmp, 10));
+    lstrcat(pos, ",");
+    lstrcat(pos, ltoa(coord.Y, tmp, 10));
+    return (*env)->NewStringUTF(env, pos);
+}
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    cursorBackLine
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorBackLine
+(JNIEnv *, jobject, jint lines) {
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO cbsi;
+    GetConsoleScreenBufferInfo(handle, &cbsi);
+    COORD coord = cbsi.dwCursorPosition;
+    coord.Y = (SHORT)(coord.Y - lines);
+
+    SetConsoleCursorPosition(handle, coord);
+}
