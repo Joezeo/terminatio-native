@@ -152,16 +152,28 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCursor
 
 /*
  * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    setCursorPosition
+ * Signature: (II)V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_setCursorPosition
+        (JNIEnv *, jobject, jint x, jint y) {
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD coord = {(short) x, (short) y};
+    SetConsoleCursorPosition(handle, coord);
+}
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
  * Method:    cursorBackLine
  * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorBackLine
-(JNIEnv *, jobject, jint lines) {
+        (JNIEnv *, jobject, jint lines) {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO cbsi;
     GetConsoleScreenBufferInfo(handle, &cbsi);
     COORD coord = cbsi.dwCursorPosition;
-    coord.Y = (SHORT)(coord.Y - lines);
+    coord.Y = (SHORT) (coord.Y - lines);
 
     SetConsoleCursorPosition(handle, coord);
 }

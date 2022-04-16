@@ -57,6 +57,14 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCursor
 
 /*
  * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    setCursorPosition
+ * Signature: (II)V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_setCursorPosition
+  (JNIEnv *, jobject, jint, jint);
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
  * Method:    cursorBackLine
  * Signature: (I)V
  */
