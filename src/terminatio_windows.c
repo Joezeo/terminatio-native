@@ -177,3 +177,31 @@ JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorBackLi
 
     SetConsoleCursorPosition(handle, coord);
 }
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    showCursor
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_showCursor
+        (JNIEnv *, jobject) {
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cinfo;
+    GetConsoleCursorInfo(handle, &cinfo);
+    cinfo.bVisible = 1;
+    SetConsoleCursorInfo(handle, &cinfo);
+}
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    hideCursor
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_hideCursor
+        (JNIEnv *, jobject) {
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cinfo;
+    GetConsoleCursorInfo(handle, &cinfo);
+    cinfo.bVisible = 0;
+    SetConsoleCursorInfo(handle, &cinfo);
+}

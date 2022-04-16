@@ -71,6 +71,22 @@ JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_setCursorPos
 JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorBackLine
   (JNIEnv *, jobject, jint);
 
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    showCursor
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_showCursor
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    hideCursor
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_hideCursor
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
