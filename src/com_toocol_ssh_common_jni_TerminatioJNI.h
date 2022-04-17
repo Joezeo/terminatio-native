@@ -87,6 +87,22 @@ JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_showCursor
 JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_hideCursor
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    cursorLeft
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorLeft
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    cursorRight
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorRight
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

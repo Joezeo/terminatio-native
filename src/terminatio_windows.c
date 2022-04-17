@@ -205,3 +205,35 @@ JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_hideCursor
     cinfo.bVisible = 0;
     SetConsoleCursorInfo(handle, &cinfo);
 }
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    cursorLeft
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorLeft
+        (JNIEnv *, jobject) {
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO cbsi;
+    GetConsoleScreenBufferInfo(handle, &cbsi);
+    COORD coord = cbsi.dwCursorPosition;
+    coord.X = (SHORT) (coord.X - 1);
+
+    SetConsoleCursorPosition(handle, coord);
+}
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    cursorRight
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorRight
+        (JNIEnv *, jobject) {
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO cbsi;
+    GetConsoleScreenBufferInfo(handle, &cbsi);
+    COORD coord = cbsi.dwCursorPosition;
+    coord.X = (SHORT) (coord.X + 1);
+
+    SetConsoleCursorPosition(handle, coord);
+}
