@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.21)
-project(terminatio_native C)
+project(termio_native C)
 
 set(CMAKE_C_STANDARD 99)
 
 include_directories(src)
 
-add_library(terminatio SHARED
-        src/com_toocol_ssh_common_jni_TerminatioJNI.h
+add_library(termio SHARED
         src/jni.h
         src/jni_md.h
-        src/terminatio_windows.c)
+        src/termio_windows.c)

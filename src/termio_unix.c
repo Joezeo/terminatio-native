@@ -1,8 +1,7 @@
 //
 // Created by user on 2022/4/14.
 //
-#include "com_toocol_ssh_common_jni_TerminatioJNI.h"
-#include <windows.h>
+#include "com_toocol_ssh_common_jni_TermioJNI.h"
 #include <conio.h>
 
 /*

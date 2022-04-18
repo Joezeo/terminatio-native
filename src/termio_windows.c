@@ -1,27 +1,27 @@
 //
 // Created by user on 2022/4/14.
 //
-#include <com_toocol_ssh_common_jni_TerminatioJNI.h>
+#include <com_toocol_ssh_common_jni_TermioJNI.h>
 #include <windows.h>
 #include <conio.h>
 #include <shlobj.h>
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    getCh
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCh
+JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_getCh
         (JNIEnv *, jobject) {
     return getch();
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    chooseFiles
  * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_chooseFiles
+JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_chooseFiles
         (JNIEnv *env, jobject) {
     TCHAR open_file_names[MAX_PATH * 80];
     TCHAR sz_file_name[MAX_PATH * 80];
@@ -71,11 +71,11 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_chooseFil
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    chooseDirectory
  * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_chooseDirectory
+JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_chooseDirectory
         (JNIEnv *env, jobject) {
     LPITEMIDLIST lp_dlist = NULL;
     TCHAR sz_path_name[MAX_PATH];
@@ -99,11 +99,11 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_chooseDir
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    getWindowWidth
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getWindowWidth
+JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_getWindowWidth
         (JNIEnv *, jobject) {
     HANDLE outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     PCONSOLE_SCREEN_BUFFER_INFO info = malloc(sizeof(CONSOLE_SCREEN_BUFFER_INFO));
@@ -114,11 +114,11 @@ JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getWindowWid
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    getWindowHeight
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getWindowHeight
+JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_getWindowHeight
         (JNIEnv *, jobject) {
     HANDLE outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     PCONSOLE_SCREEN_BUFFER_INFO info = malloc(sizeof(CONSOLE_SCREEN_BUFFER_INFO));
@@ -129,11 +129,11 @@ JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getWindowHei
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    getCursorPosition
  * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCursorPosition
+JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_getCursorPosition
         (JNIEnv *env, jobject) {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO cbsi;
@@ -151,11 +151,11 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_getCursor
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    setCursorPosition
  * Signature: (II)V
  */
-JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_setCursorPosition
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_setCursorPosition
         (JNIEnv *, jobject, jint x, jint y) {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD coord = {(short) x, (short) y};
@@ -163,11 +163,11 @@ JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_setCursorPos
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    cursorBackLine
  * Signature: (I)V
  */
-JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorBackLine
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_cursorBackLine
         (JNIEnv *, jobject, jint lines) {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO cbsi;
@@ -179,11 +179,11 @@ JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorBackLi
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    showCursor
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_showCursor
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_showCursor
         (JNIEnv *, jobject) {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cinfo;
@@ -193,11 +193,11 @@ JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_showCursor
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    hideCursor
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_hideCursor
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_hideCursor
         (JNIEnv *, jobject) {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cinfo;
@@ -207,11 +207,11 @@ JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_hideCursor
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    cursorLeft
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorLeft
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_cursorLeft
         (JNIEnv *, jobject) {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO cbsi;
@@ -223,11 +223,11 @@ JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorLeft
 }
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    cursorRight
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TerminatioJNI_cursorRight
+JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_cursorRight
         (JNIEnv *, jobject) {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO cbsi;
