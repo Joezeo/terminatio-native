@@ -25,6 +25,22 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_chooseDirecto
   (JNIEnv *, jobject);
 
 /*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    getWindowWidth
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_getWindowWidth
+        (JNIEnv *, jobject);
+
+/*
+ * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Method:    getWindowHeight
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_getWindowHeight
+        (JNIEnv *, jobject);
+
+/*
  * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    getCursorPosition
  * Signature: ()Ljava/lang/String;
