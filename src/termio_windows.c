@@ -164,6 +164,7 @@ JNIEXPORT void JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_cursorBackLine
     CONSOLE_SCREEN_BUFFER_INFO cbsi;
     GetConsoleScreenBufferInfo(handle, &cbsi);
     COORD coord = cbsi.dwCursorPosition;
+    coord.X = 0;
     coord.Y = (SHORT) (coord.Y - lines);
 
     SetConsoleCursorPosition(handle, coord);

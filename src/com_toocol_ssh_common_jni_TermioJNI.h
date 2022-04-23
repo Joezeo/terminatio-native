@@ -7,7 +7,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 /*
  * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    chooseFiles
@@ -25,20 +24,20 @@ JNIEXPORT jstring JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_chooseDirecto
   (JNIEnv *, jobject);
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    getWindowWidth
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_getWindowWidth
-        (JNIEnv *, jobject);
+  (JNIEnv *, jobject);
 
 /*
- * Class:     com_toocol_ssh_common_jni_TerminatioJNI
+ * Class:     com_toocol_ssh_common_jni_TermioJNI
  * Method:    getWindowHeight
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_toocol_ssh_common_jni_TermioJNI_getWindowHeight
-        (JNIEnv *, jobject);
+  (JNIEnv *, jobject);
 
 /*
  * Class:     com_toocol_ssh_common_jni_TermioJNI
